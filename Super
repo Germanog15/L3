@@ -1,0 +1,12 @@
+WITH leaderboard_rank AS (
+  SELECT
+    ROW_NUMBER() OVER (ORDER BY "layer3_xp" DESC) AS rank,
+    "wallet_address",
+    "layer3_xp"
+  FROM dune."l3-dune-wizards".dataset_superchain_evolution_campaign
+)
+SELECT
+  *
+FROM leaderboard_rank
+ORDER BY
+  rank
